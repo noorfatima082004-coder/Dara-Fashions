@@ -162,6 +162,33 @@
   animation: splash-progress 2.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
 }
 
+/* Mobile: show splash content immediately — avoids invisible screen before redirect */
+@media (max-width: 430px) {
+  .splash-logo-reveal,
+  .splash-brand-name,
+  .splash-subtitle,
+  .splash-divider,
+  .splash-tagline,
+  .splash-dots {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .splash-bg {
+    animation: none !important;
+  }
+
+  .splash-shimmer {
+    display: none;
+  }
+
+  .splash-progress {
+    animation: splash-progress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
 /* ── Global premium animations ── */
 
 @keyframes page-enter {

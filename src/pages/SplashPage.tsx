@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { markSplashSeen } from '../components/SplashGate'
 
 export function SplashPage() {
   const navigate = useNavigate()
   const [exiting, setExiting] = useState(false)
 
   useEffect(() => {
-    const exitTimer = setTimeout(() => setExiting(true), 2800)
-    const navTimer = setTimeout(() => navigate('/home'), 3400)
+    const exitTimer = setTimeout(() => setExiting(true), 3500)
+    const navTimer = setTimeout(() => {
+      markSplashSeen()
+      navigate('/home', { replace: true })
+    }, 4200)
     return () => {
       clearTimeout(exitTimer)
       clearTimeout(navTimer)
@@ -16,11 +20,10 @@ export function SplashPage() {
 
   return (
     <div
-      className={`app-shell relative flex min-h-[100dvh] flex-col items-center justify-between overflow-hidden bg-[#FAF8F5] transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[100] flex min-h-[100dvh] w-full flex-col items-center justify-between overflow-hidden bg-[#FAF8F5] transition-opacity duration-500 ${
         exiting ? 'opacity-0' : 'opacity-100'
       }`}
     >
-      {/* Ambient silk texture */}
       <div
         className="splash-bg absolute inset-0 bg-cover bg-center opacity-30"
         style={{
@@ -30,10 +33,8 @@ export function SplashPage() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-[#FAF8F5]/80 to-white/95" />
 
-      {/* Shimmer accent */}
       <div className="splash-shimmer absolute left-0 top-1/3 h-px w-full" />
 
-      {/* Logo & brand */}
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-8">
         <div className="splash-logo-reveal mb-6">
           <img
@@ -51,7 +52,6 @@ export function SplashPage() {
           PAKISTANI FASHION
         </p>
 
-        {/* Gold divider */}
         <div className="splash-divider mt-8 flex items-center gap-3">
           <div className="h-px w-12 bg-gradient-to-r from-transparent to-dara-tan" />
           <div className="h-1 w-1 rotate-45 bg-dara-tan" />
@@ -59,7 +59,6 @@ export function SplashPage() {
         </div>
       </div>
 
-      {/* Tagline & progress */}
       <div className="relative z-10 mb-16 flex w-full flex-col items-center gap-6 px-8">
         <p className="splash-tagline font-serif text-xl italic text-dara-charcoal/80">
           Timeless style. Modern you.
