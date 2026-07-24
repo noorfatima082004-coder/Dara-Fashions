@@ -9,9 +9,10 @@ interface ProductCardProps {
   product: Product
   variant?: 'grid' | 'scroll'
   index?: number
+  tag?: string
 }
 
-export function ProductCard({ product, variant = 'grid', index = 0 }: ProductCardProps) {
+export function ProductCard({ product, variant = 'grid', index = 0, tag }: ProductCardProps) {
   const { isFavorite, toggleFavorite } = useCart()
   const fav = isFavorite(product.id)
   const [heartAnim, setHeartAnim] = useState(false)
@@ -60,6 +61,7 @@ export function ProductCard({ product, variant = 'grid', index = 0 }: ProductCar
           {product.name}
         </p>
         <p className="mt-0.5 text-xs text-gray-500">{formatPrice(product.price)}</p>
+        {tag && <p className="mt-1 truncate text-[10px] font-medium text-dara-tan">{tag}</p>}
       </div>
     </Link>
   )

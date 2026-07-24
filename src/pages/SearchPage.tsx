@@ -184,9 +184,13 @@ export function SearchPage() {
               <span className="font-medium text-dara-charcoal">{trimmed}</span>&quot;
             </p>
             <div className="grid grid-cols-2 gap-3 p-4" key={trimmed}>
-              {results.map((product, i) => (
+              {results.map(({ product, matchedColors }, i) => (
                 <div key={product.id} onClickCapture={() => commitSearch(trimmed)}>
-                  <ProductCard product={product} index={i} />
+                  <ProductCard
+                    product={product}
+                    index={i}
+                    tag={matchedColors.length > 0 ? `Also available in ${matchedColors.join(', ')}` : undefined}
+                  />
                 </div>
               ))}
             </div>

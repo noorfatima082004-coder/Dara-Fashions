@@ -159,25 +159,50 @@ export function getProductsByCategory(categoryId: string, tab?: string): Product
   return filtered
 }
 
-export function searchProducts(query: string): Product[] {
+export interface SearchResult {
+  product: Product
+  /** Colors that satisfied the query even though they don't appear in the title. */
+  matchedColors: string[]
+}
+
+/**
+ * Matches only against the product title and its available colors (not
+ * description/category) — a term that isn't in the title still matches if
+ * the product comes in that color, and gets flagged via `matchedColors` so
+ * the UI can show "Also available in <color>".
+ */
+export function searchProducts(query: string): SearchResult[] {
   const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean)
   if (terms.length === 0) return []
 
-  return products.filter((p) => {
-    const categoryName = categories.find((c) => c.id === p.category)?.name ?? ''
-    const haystack = [
-      p.name,
-      categoryName,
-      p.category,
-      (p.subcategory ?? '').replace(/-/g, ' '),
-      p.description,
-      ...p.colors.map((c) => c.name),
-    ]
-      .join(' ')
-      .toLowerCase()
+  const results: SearchResult[] = []
 
-    return terms.every((term) => haystack.includes(term))
-  })
+  for (const product of products) {
+    const nameLower = product.name.toLowerCase()
+    const remainingTerms = terms.filter((term) => !nameLower.includes(term))
+
+    if (remainingTerms.length === 0) {
+      results.push({ product, matchedColors: [] })
+      continue
+    }
+
+    const matchedColors = new Set<string>()
+    const allRemainingMatchColor = remainingTerms.every((term) =>
+      product.colors.some((color) => {
+        if (color.name.toLowerCase().includes(term)) {
+          matchedColors.add(color.name)
+          return true
+        }
+        return false
+      })
+    )
+
+    if (allRemainingMatchColor) {
+      results.push({ product, matchedColors: Array.from(matchedColors) })
+    }
+  }
+
+  return results
 }
 
 export function searchCategories(query: string): Category[] {
