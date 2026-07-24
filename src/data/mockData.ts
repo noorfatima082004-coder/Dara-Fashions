@@ -158,3 +158,30 @@ export function getProductsByCategory(categoryId: string, tab?: string): Product
   }
   return filtered
 }
+
+export function searchProducts(query: string): Product[] {
+  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean)
+  if (terms.length === 0) return []
+
+  return products.filter((p) => {
+    const categoryName = categories.find((c) => c.id === p.category)?.name ?? ''
+    const haystack = [
+      p.name,
+      categoryName,
+      p.category,
+      (p.subcategory ?? '').replace(/-/g, ' '),
+      p.description,
+      ...p.colors.map((c) => c.name),
+    ]
+      .join(' ')
+      .toLowerCase()
+
+    return terms.every((term) => haystack.includes(term))
+  })
+}
+
+export function searchCategories(query: string): Category[] {
+  const q = query.trim().toLowerCase()
+  if (!q) return []
+  return categories.filter((c) => c.name.toLowerCase().includes(q))
+}

@@ -13,9 +13,9 @@ export function HomeHeader() {
       </button>
       <LogoSmall />
       <div className="flex items-center gap-3">
-        <button className="p-1 text-dara-charcoal" aria-label="Search">
+        <Link to="/search" className="press-scale p-1 text-dara-charcoal" aria-label="Search">
           <Search size={20} strokeWidth={1.5} />
-        </button>
+        </Link>
         <Link to="/bag" className="relative p-1 text-dara-charcoal">
           <ShoppingBag size={20} strokeWidth={1.5} />
           {cartCount > 0 && (

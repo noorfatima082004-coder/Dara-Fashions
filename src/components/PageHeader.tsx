@@ -17,9 +17,9 @@ export function PageHeader({ title, backTo = '/home', rightAction, showSearch }:
       <h1 className="font-serif text-lg font-medium">{title}</h1>
       <div className="flex min-w-[4rem] items-center justify-end gap-2">
         {showSearch && (
-          <button className="p-1 text-dara-charcoal" aria-label="Search">
+          <Link to="/search" className="press-scale p-1 text-dara-charcoal" aria-label="Search">
             <Search size={20} strokeWidth={1.5} />
-          </button>
+          </Link>
         )}
         {rightAction}
       </div>
