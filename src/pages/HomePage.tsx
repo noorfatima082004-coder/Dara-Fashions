@@ -26,7 +26,7 @@ export function HomePage() {
         <section className="relative mx-4 mb-6 overflow-hidden rounded-dara">
           <div className="relative aspect-[4/5]">
             <img
-              src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=900&q=85"
+              src="/hero-couple.jpg"
               alt="Luxury Pret Collection"
               className="hero-ken-burns h-full w-full object-cover object-top"
             />
