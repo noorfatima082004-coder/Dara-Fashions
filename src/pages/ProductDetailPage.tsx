@@ -56,7 +56,7 @@ export function ProductDetailPage() {
           <div
             className="absolute inset-x-0 top-0 flex items-center justify-between p-4"
             style={{
-              animation: 'anim-fade-in 0.6s ease-out 0.4s forwards',
+              animation: 'anim-fade-in 0.4s ease-out 0.15s forwards',
               opacity: 0,
             }}
           >
@@ -75,7 +75,7 @@ export function ProductDetailPage() {
                   size={20}
                   strokeWidth={1.5}
                   className={`transition-colors duration-300 ${
-                    fav ? 'fill-dara-tan text-dara-tan' : ''
+                    fav ? 'fill-red-500 text-red-500' : ''
                   } ${heartAnim ? 'animate-heart-pop' : ''}`}
                 />
               </button>
@@ -90,7 +90,7 @@ export function ProductDetailPage() {
           <h1
             className="font-serif text-2xl font-medium"
             style={{
-              animation: 'hero-text-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards',
+              animation: 'hero-text-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.08s forwards',
               opacity: 0,
             }}
           >
@@ -99,7 +99,7 @@ export function ProductDetailPage() {
           <p
             className="mt-1 text-lg font-semibold"
             style={{
-              animation: 'hero-text-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards',
+              animation: 'hero-text-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.14s forwards',
               opacity: 0,
             }}
           >
@@ -108,7 +108,7 @@ export function ProductDetailPage() {
           <p
             className="mt-3 text-sm leading-relaxed text-gray-600"
             style={{
-              animation: 'hero-text-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards',
+              animation: 'hero-text-reveal 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards',
               opacity: 0,
             }}
           >
@@ -118,7 +118,7 @@ export function ProductDetailPage() {
           <div
             className="mt-6"
             style={{
-              animation: 'anim-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards',
+              animation: 'anim-fade-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.26s forwards',
               opacity: 0,
             }}
           >
@@ -144,7 +144,7 @@ export function ProductDetailPage() {
           <div
             className="mt-6"
             style={{
-              animation: 'anim-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards',
+              animation: 'anim-fade-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) 0.32s forwards',
               opacity: 0,
             }}
           >

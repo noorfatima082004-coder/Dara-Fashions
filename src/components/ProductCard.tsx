@@ -51,7 +51,7 @@ export function ProductCard({ product, variant = 'grid', index = 0, tag }: Produ
             size={16}
             strokeWidth={1.5}
             className={`transition-colors duration-300 ${
-              fav ? 'fill-dara-tan text-dara-tan' : 'text-dara-charcoal'
+              fav ? 'fill-red-500 text-red-500' : 'text-dara-charcoal'
             } ${heartAnim ? 'animate-heart-pop' : ''}`}
           />
         </button>
@@ -61,7 +61,11 @@ export function ProductCard({ product, variant = 'grid', index = 0, tag }: Produ
           {product.name}
         </p>
         <p className="mt-0.5 text-xs text-gray-500">{formatPrice(product.price)}</p>
-        {tag && <p className="mt-1 truncate text-[10px] font-medium text-dara-tan">{tag}</p>}
+        {tag && (
+          <span className="mt-1.5 inline-block max-w-full truncate rounded-full bg-dara-tan px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm">
+            {tag}
+          </span>
+        )}
       </div>
     </Link>
   )

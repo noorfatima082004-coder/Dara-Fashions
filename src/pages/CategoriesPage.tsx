@@ -45,7 +45,7 @@ export function CategoriesPage() {
 
         <div className="mt-4 grid grid-cols-2 gap-3">
           {secondary.map((cat, i) => (
-            <AnimateIn key={cat.id} animation="scale-in" delay={400 + i * 80}>
+            <AnimateIn key={cat.id} animation="scale-in" delay={180 + i * 50}>
               <Link
                 to={`/products/${cat.id}`}
                 className="press-scale group relative block aspect-[4/3] overflow-hidden rounded-dara bg-dara-gray"
@@ -64,7 +64,7 @@ export function CategoriesPage() {
           ))}
         </div>
 
-        <AnimateIn animation="fade-up" delay={700}>
+        <AnimateIn animation="fade-up" delay={380}>
           <Link
             to="/products/shirts"
             className="btn-shimmer press-scale mt-6 block w-full rounded-dara bg-dara-charcoal py-3.5 text-center text-xs font-semibold tracking-wider text-white transition-colors hover:bg-black"

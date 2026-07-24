@@ -22,7 +22,7 @@ export function HomePage() {
       <HomeHeader />
 
       {/* Hero */}
-      <AnimateIn animation="blur-in" duration={900}>
+      <AnimateIn animation="blur-in" duration={500}>
         <section className="relative mx-4 mb-6 overflow-hidden rounded-dara">
           <div className="relative aspect-[4/5]">
             <img

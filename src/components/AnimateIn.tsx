@@ -21,7 +21,7 @@ export function AnimateIn({
   children,
   animation = 'fade-up',
   delay = 0,
-  duration = 500,
+  duration = 350,
   className = '',
 }: AnimateInProps) {
   const ref = useRef<HTMLDivElement>(null)
