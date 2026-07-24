@@ -13,6 +13,8 @@ interface CartContextValue {
   addToCart: (product: Product, color: string, size: string) => void
   removeFromCart: (productId: string, color: string, size: string) => void
   updateQuantity: (productId: string, color: string, size: string, quantity: number) => void
+  removeMany: (keys: string[]) => void
+  clearCart: () => void
   toggleFavorite: (productId: string) => void
   isFavorite: (productId: string) => boolean
   cartCount: number
@@ -96,6 +98,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
     []
   )
 
+  const removeMany = useCallback((keys: string[]) => {
+    setItems((prev) =>
+      prev.filter((i) => !keys.includes(`${i.product.id}-${i.color}-${i.size}`))
+    )
+  }, [])
+
+  const clearCart = useCallback(() => {
+    setItems([])
+  }, [])
+
   const toggleFavorite = useCallback((productId: string) => {
     setFavorites((prev) =>
       prev.includes(productId)
@@ -120,6 +132,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         addToCart,
         removeFromCart,
         updateQuantity,
+        removeMany,
+        clearCart,
         toggleFavorite,
         isFavorite,
         cartCount,
