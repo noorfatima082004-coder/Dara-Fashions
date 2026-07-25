@@ -72,8 +72,20 @@ async function analyzeUserProfile(userId, imageBuffer, opts = {}) {
   }
 
   // Downscale/re-encode before Gemini sees it — caps the cost of every call
-  // regardless of what the client actually uploaded.
-  const preparedImage = await prepareImageForGemini(imageBuffer);
+  // regardless of what the client actually uploaded. A decode failure here
+  // means the upload isn't a real photo (corrupt file, unsupported format),
+  // not a server problem — surfaced as a distinct 400 so the UI can tell
+  // the user to pick a different file instead of "try again" implying a
+  // transient server issue.
+  let preparedImage;
+  try {
+    preparedImage = await prepareImageForGemini(imageBuffer);
+  } catch (err) {
+    console.error(`[userAnalysis] Could not decode uploaded image for user ${userId}:`, err.message);
+    const invalidImageError = new Error("Could not read this as a photo. Please try a different image.");
+    invalidImageError.statusCode = 400;
+    throw invalidImageError;
+  }
 
   try {
     const raw = await callGeminiJSON({

@@ -29,7 +29,10 @@ router.post("/analyze-user", analyzeLimiter, validateAnalyzeRequest, async (req,
     res.json(profile);
   } catch (err) {
     console.error("[/analyze-user] error:", err);
-    res.status(500).json({ error: "Failed to analyze photo. Please try again." });
+    const status = err.statusCode || 500;
+    res.status(status).json({
+      error: status === 400 ? err.message : "Failed to analyze photo. Please try again.",
+    });
   }
 });
 
