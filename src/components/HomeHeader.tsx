@@ -1,14 +1,21 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Search, ShoppingBag } from 'lucide-react'
 import { LogoSmall } from './Logo'
+import { SideDrawer } from './SideDrawer'
 import { useCart } from '../context/CartContext'
 
 export function HomeHeader() {
   const { cartCount } = useCart()
+  const [isDrawerOpen, setDrawerOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-40 flex items-center justify-between bg-white px-4 py-3">
-      <button className="p-1 text-dara-charcoal" aria-label="Menu">
+      <button
+        className="press-scale p-1 text-dara-charcoal"
+        aria-label="Menu"
+        onClick={() => setDrawerOpen(true)}
+      >
         <Menu size={22} strokeWidth={1.5} />
       </button>
       <LogoSmall />
@@ -25,6 +32,7 @@ export function HomeHeader() {
           )}
         </Link>
       </div>
+      <SideDrawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)} />
     </header>
   )
 }

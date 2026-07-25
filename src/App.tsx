@@ -10,6 +10,7 @@ import { SearchPage } from './pages/SearchPage'
 import { BagPage } from './pages/BagPage'
 import { FavoritesPage } from './pages/FavoritesPage'
 import { AccountPage } from './pages/AccountPage'
+import { SkinAnalysisPage } from './pages/SkinAnalysisPage'
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/bag" element={<BagPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="/account" element={<AccountPage />} />
+            <Route path="/skin-analysis" element={<SkinAnalysisPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </SplashGate>
