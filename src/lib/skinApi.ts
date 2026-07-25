@@ -17,7 +17,12 @@ export interface SkinProfile {
   warnings?: string[]
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
+// Empty by default: on Vercel the API is deployed as a serverless function
+// under the same domain (see api/[...all].cjs), so a relative path is
+// enough and resolves same-origin. Set VITE_API_BASE_URL only for local
+// dev against the standalone server/ process, or if the backend is hosted
+// on a separate domain from the frontend.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 const PROFILE_CACHE_KEY = 'dara_skin_profile'
 
 export function loadCachedProfile(): SkinProfile | null {
@@ -48,12 +53,12 @@ export async function analyzeUser(
   image: CompressedImage,
   opts: { forceRefresh?: boolean } = {}
 ): Promise<SkinProfile> {
-  const url = new URL('/api/analyze-user', API_BASE_URL)
-  if (opts.forceRefresh) url.searchParams.set('refresh', 'true')
+  const path = `/api/analyze-user${opts.forceRefresh ? '?refresh=true' : ''}`
+  const url = API_BASE_URL ? new URL(path, API_BASE_URL).toString() : path
 
   let res: Response
   try {
-    res = await fetch(url.toString(), {
+    res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId: getDeviceId(), image }),

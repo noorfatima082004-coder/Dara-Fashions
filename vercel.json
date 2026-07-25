@@ -4,6 +4,6 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
-    { "source": "/((?!assets/|logo\\.png|favicon\\.svg).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|assets/|logo\\.png|favicon\\.svg).*)", "destination": "/index.html" }
   ]
 }
